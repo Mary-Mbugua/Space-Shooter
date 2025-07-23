@@ -10,9 +10,9 @@ let enemySpawnTimer = 0;
 let difficulty = 1;
 
 // Game settings
-const PLAYER_SPEED = 0.5;
+const PLAYER_SPEED = 1;
 const BULLET_SPEED = 1;
-const ENEMY_SPEED = 0.3;
+const ENEMY_SPEED = 1;
 const SHOOT_COOLDOWN = 150; // milliseconds
 const ENEMY_SPAWN_RATE = 2000; // milliseconds
 
