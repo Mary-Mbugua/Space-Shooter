@@ -14,7 +14,7 @@ const PLAYER_SPEED = 1;
 const BULLET_SPEED = 1;
 const ENEMY_SPEED = 1;
 const SHOOT_COOLDOWN = 150; // milliseconds
-const ENEMY_SPAWN_RATE = 2000; // milliseconds
+const ENEMY_SPAWN_RATE = 1000; // milliseconds
 
 // Initialize the game
 function init() {
