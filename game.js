@@ -18,8 +18,17 @@ const ENEMY_SPAWN_RATE = 2000; // milliseconds
 
 // Initialize the game
 function init() {
+    console.log('Initializing game...');
+    
+    // Check if THREE is available
+    if (typeof THREE === 'undefined') {
+        console.error('THREE.js is not loaded!');
+        return;
+    }
+    
     // Create scene
     scene = new THREE.Scene();
+    console.log('Scene created');
     
     // Create camera (orthographic for 2D feel)
     const aspect = window.innerWidth / window.innerHeight;
@@ -30,24 +39,36 @@ function init() {
         1, 1000
     );
     camera.position.z = 100;
+    console.log('Camera created');
     
     // Create renderer
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000011);
-    document.getElementById('gameContainer').appendChild(renderer.domElement);
+    
+    const gameContainer = document.getElementById('gameContainer');
+    if (!gameContainer) {
+        console.error('Game container not found!');
+        return;
+    }
+    gameContainer.appendChild(renderer.domElement);
+    console.log('Renderer created and added to DOM');
     
     // Create starfield background
     createStarfield();
+    console.log('Starfield created');
     
     // Create player
     createPlayer();
+    console.log('Player created');
     
     // Set up event listeners
     setupEventListeners();
+    console.log('Event listeners setup');
     
     // Start render loop
     animate();
+    console.log('Animation started');
 }
 
 function createStarfield() {
@@ -319,6 +340,14 @@ function updateUI() {
 }
 
 function startGame() {
+    console.log('Starting game...');
+    
+    // Check if game is initialized
+    if (!scene || !camera || !renderer || !player) {
+        console.error('Game not properly initialized!');
+        return;
+    }
+    
     gameState = 'playing';
     score = 0;
     lives = 3;
@@ -336,11 +365,14 @@ function startGame() {
     player.position.set(0, -8, 0);
     
     // Hide start screen
-    document.getElementById('startScreen').style.display = 'none';
-    document.getElementById('gameOver').style.display = 'none';
+    const startScreen = document.getElementById('startScreen');
+    const gameOverScreen = document.getElementById('gameOver');
+    if (startScreen) startScreen.style.display = 'none';
+    if (gameOverScreen) gameOverScreen.style.display = 'none';
     
     updateUI();
     enemySpawnTimer = Date.now();
+    console.log('Game started successfully');
 }
 
 function gameOver() {
@@ -365,8 +397,22 @@ function animate() {
         updateDifficulty();
     }
     
-    renderer.render(scene, camera);
+    if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+    }
 }
 
 // Initialize the game when the page loads
-window.addEventListener('load', init);
+window.addEventListener('load', () => {
+    console.log('Page loaded, initializing game...');
+    try {
+        init();
+        console.log('Game initialized successfully');
+    } catch (error) {
+        console.error('Error initializing game:', error);
+    }
+});
+
+// Make sure startGame and restartGame are globally available
+window.startGame = startGame;
+window.restartGame = restartGame;

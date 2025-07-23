@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Test</title>
+</head>
+<body>
+    <div id="test-container" style="margin: 20px;">
+        <h1>Three.js Game Test</h1>
+        <div id="test-results"></div>
+        <button onclick="runTests()" style="padding: 10px; margin: 10px;">Run Tests</button>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        function log(message) {
+            const results = document.getElementById('test-results');
+            results.innerHTML += '<div>' + message + '</div>';
+            console.log(message);
+        }
+        
+        function runTests() {
+            document.getElementById('test-results').innerHTML = '';
+            
+            log('Starting Three.js tests...');
+            
+            // Test 1: Check if THREE is available
+            if (typeof THREE !== 'undefined') {
+                log('✓ THREE.js is loaded successfully');
+                log('✓ THREE.js version: ' + THREE.REVISION);
+            } else {
+                log('✗ THREE.js failed to load');
+                return;
+            }
+            
+            // Test 2: Create basic Three.js objects
+            try {
+                const scene = new THREE.Scene();
+                log('✓ Scene created successfully');
+                
+                const camera = new THREE.OrthographicCamera(-10, 10, 10, -10, 1, 1000);
+                log('✓ Camera created successfully');
+                
+                const renderer = new THREE.WebGLRenderer();
+                log('✓ Renderer created successfully');
+                
+                const geometry = new THREE.ConeGeometry(0.5, 2, 3);
+                const material = new THREE.MeshBasicMaterial({ color: 0x00ff88 });
+                const mesh = new THREE.Mesh(geometry, material);
+                log('✓ Mesh created successfully');
+                
+                log('✓ All Three.js objects created successfully');
+                log('✓ Game should work properly!');
+                
+            } catch (error) {
+                log('✗ Error creating Three.js objects: ' + error.message);
+            }
+        }
+        
+        // Auto-run tests when page loads
+        window.addEventListener('load', runTests);
+    </script>
+</body>
+</html>

@@ -142,7 +142,16 @@
         </div>
     </div>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+    <script>
+        // Check if Three.js loaded correctly
+        if (typeof THREE === 'undefined') {
+            console.error('Three.js failed to load from CDN');
+            document.body.innerHTML = '<div style="color: white; text-align: center; margin-top: 50px;"><h1>Error: Three.js failed to load</h1><p>Please check your internet connection and refresh the page.</p></div>';
+        } else {
+            console.log('Three.js loaded successfully, version:', THREE.REVISION);
+        }
+    </script>
     <script src="game.js"></script>
 </body>
 </html>
