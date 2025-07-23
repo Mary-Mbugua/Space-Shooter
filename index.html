@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Shooter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        #gameContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            z-index: 100;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 200;
+            display: none;
+            background: rgba(0,0,0,0.8);
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px solid #00ff88;
+        }
+        
+        #gameOver h1 {
+            color: #ff4444;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+        
+        #gameOver button {
+            background: #00ff88;
+            color: black;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        #gameOver button:hover {
+            background: #00cc66;
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            z-index: 100;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        #startScreen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 200;
+            background: rgba(0,0,0,0.8);
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px solid #00ff88;
+        }
+        
+        #startScreen h1 {
+            color: #00ff88;
+            margin-bottom: 30px;
+            font-size: 48px;
+            text-shadow: 0 0 20px #00ff88;
+        }
+        
+        #startScreen button {
+            background: #00ff88;
+            color: black;
+            border: none;
+            padding: 20px 40px;
+            font-size: 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        #startScreen button:hover {
+            background: #00cc66;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="ui">
+            <div>Score: <span id="score">0</span></div>
+            <div>Lives: <span id="lives">3</span></div>
+        </div>
+        
+        <div id="controls">
+            WASD or Arrow Keys: Move | Space: Shoot | P: Pause
+        </div>
+        
+        <div id="startScreen">
+            <h1>SPACE SHOOTER</h1>
+            <p>Defend Earth from the alien invasion!</p>
+            <button onclick="startGame()">START GAME</button>
+            <div style="margin-top: 20px; font-size: 16px;">
+                <p>Use WASD or Arrow Keys to move</p>
+                <p>Press SPACE to shoot</p>
+                <p>Survive as long as you can!</p>
+            </div>
+        </div>
+        
+        <div id="gameOver">
+            <h1>GAME OVER</h1>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button onclick="restartGame()">PLAY AGAIN</button>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
